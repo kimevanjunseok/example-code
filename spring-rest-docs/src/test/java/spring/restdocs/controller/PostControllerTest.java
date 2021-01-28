@@ -69,7 +69,7 @@ class PostControllerTest {
 
     @Test
     void findAll() throws Exception {
-        List<PostResponse> postResponses = Lists.newArrayList(
+        final List<PostResponse> postResponses = Lists.newArrayList(
                 new PostResponse(1L, "title1", "content1"),
                 new PostResponse(2L, "title2", "content2")
         );

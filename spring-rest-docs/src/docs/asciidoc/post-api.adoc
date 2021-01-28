@@ -1,0 +1,62 @@
+= Spring REST Docs
+:toc: left
+:toclevels: 2
+:sectlinks:
+
+[[resources-post]]
+== Post
+
+[[resources-post-create]]
+=== Post 생성
+
+==== HTTP request
+
+include::{snippets}/post-create/http-request.adoc[]
+
+==== HTTP response
+
+include::{snippets}/post-create/http-response.adoc[]
+
+[[resources-post-get-all]]
+=== Post 전체 조회
+
+==== HTTP request
+
+include::{snippets}/post-get-all/http-request.adoc[]
+
+==== HTTP response
+
+include::{snippets}/post-get-all/http-response.adoc[]
+
+[[resources-post-get-one]]
+=== Post 단일 조회
+
+==== HTTP request
+
+include::{snippets}/post-get-one/http-request.adoc[]
+
+==== HTTP response
+
+include::{snippets}/post-get-one/http-response.adoc[]
+
+[[resources-post-update]]
+=== Post 수정
+
+==== HTTP request
+
+include::{snippets}/post-update/http-request.adoc[]
+
+==== HTTP response
+
+include::{snippets}/post-update/http-response.adoc[]
+
+[[resources-post-delete]]
+=== Post 삭제
+
+==== HTTP request
+
+include::{snippets}/post-delete/http-request.adoc[]
+
+==== HTTP response
+
+include::{snippets}/post-delete/http-response.adoc[]
