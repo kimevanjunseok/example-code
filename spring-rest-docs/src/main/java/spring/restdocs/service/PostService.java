@@ -30,4 +30,10 @@ public class PostService {
                 .map(PostResponse::of)
                 .collect(Collectors.toList());
     }
+
+    public PostResponse findById(final Long postId) {
+        Post post = postRepository.findById(postId)
+                .orElseThrow(RuntimeException::new);
+        return PostResponse.of(post);
+    }
 }
