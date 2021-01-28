@@ -16,7 +16,7 @@ public class Post {
     @Column(nullable = false, length = 25)
     private String title;
 
-    @Column(nullable = false)
+    @Column
     private String content;
 
     protected Post() {}

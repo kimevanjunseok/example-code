@@ -8,7 +8,7 @@ public class PostResponse {
     private String title;
     private String content;
 
-    private PostResponse(final Long id, final String title, final String content) {
+    public PostResponse(final Long id, final String title, final String content) {
         this.id = id;
         this.title = title;
         this.content = content;
