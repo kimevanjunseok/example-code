@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import spring.restdocs.dto.PostRequest;
+import spring.restdocs.dto.PostResponse;
 import spring.restdocs.service.PostService;
 
 @RequestMapping("/posts")
