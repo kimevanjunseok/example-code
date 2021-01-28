@@ -1,11 +1,17 @@
 package spring.restdocs.dto;
 
+import spring.restdocs.post.Post;
+
 public class PostRequest {
 
     private String title;
     private String content;
 
     protected PostRequest() {}
+
+    public Post toEntity() {
+        return new Post(this.title, this.content);
+    }
 
     public String getTitle() {
         return title;
