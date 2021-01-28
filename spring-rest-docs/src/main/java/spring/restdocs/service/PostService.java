@@ -1,5 +1,8 @@
 package spring.restdocs.service;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 import org.springframework.stereotype.Service;
 
 import spring.restdocs.dto.PostRequest;
@@ -19,5 +22,12 @@ public class PostService {
     public PostResponse create(final PostRequest postRequest) {
         Post post = postRepository.save(postRequest.toEntity());
         return PostResponse.of(post);
+    }
+
+    public List<PostResponse> findAll() {
+        List<Post> posts = postRepository.findAll();
+        return posts.stream()
+                .map(PostResponse::of)
+                .collect(Collectors.toList());
     }
 }
