@@ -26,6 +26,11 @@ public class Post {
         this.content = content;
     }
 
+    public void update(final Post post) {
+        this.title = post.getTitle();
+        this.content = post.getContent();
+    }
+
     public Long getId() {
         return id;
     }

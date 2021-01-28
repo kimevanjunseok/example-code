@@ -36,4 +36,10 @@ public class PostService {
                 .orElseThrow(RuntimeException::new);
         return PostResponse.of(post);
     }
+
+    public void update(final Long postId, final PostRequest postRequest) {
+        Post post = postRepository.findById(postId)
+                .orElseThrow(RuntimeException::new);
+        post.update(postRequest.toEntity());
+    }
 }
