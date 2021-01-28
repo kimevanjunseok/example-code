@@ -23,6 +23,7 @@ public class PostController {
 
     @GetMapping
     public ResponseEntity create(@RequestBody final PostRequest postRequest) {
-        return ResponseEntity.created(URI.create("/posts/")).body();
+        PostResponse postResponse = postService.create(postRequest);
+        return ResponseEntity.created(URI.create("/posts/")).body(postResponse);
     }
 }
