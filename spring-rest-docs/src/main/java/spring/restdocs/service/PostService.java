@@ -42,4 +42,10 @@ public class PostService {
                 .orElseThrow(RuntimeException::new);
         post.update(postRequest.toEntity());
     }
+
+    public void delete(final Long postId) {
+        Post post = postRepository.findById(postId)
+                .orElseThrow(RuntimeException::new);
+        postRepository.delete(post);
+    }
 }
