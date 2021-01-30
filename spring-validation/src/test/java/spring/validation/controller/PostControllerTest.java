@@ -32,6 +32,7 @@ class PostControllerTest {
                 .content("{\"title\": \"\", \n\"content\": \"content\"}")
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isBadRequest())
-                .andExpect(jsonPath("$.title", Is.is("must not be blank")));
+                // .andExpect(jsonPath("$.title", Is.is("must not be blank")));
+                .andExpect(jsonPath("$.title", Is.is("Post's title must not be blank")));
     }
 }
