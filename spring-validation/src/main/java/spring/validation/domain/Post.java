@@ -20,6 +20,11 @@ public class Post {
 
     protected Post() {}
 
+    public Post(final String title, final String content) {
+        this.title = title;
+        this.content = content;
+    }
+
     public Long getId() {
         return id;
     }
