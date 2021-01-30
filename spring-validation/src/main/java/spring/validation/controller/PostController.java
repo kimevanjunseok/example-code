@@ -2,6 +2,8 @@ package spring.validation.controller;
 
 import java.net.URI;
 
+import javax.validation.Valid;
+
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -23,7 +25,7 @@ public class PostController {
     }
 
     @PostMapping
-    public ResponseEntity<PostResponse> create(@RequestBody final PostRequest postRequest) {
+    public ResponseEntity<PostResponse> create(@RequestBody @Valid final PostRequest postRequest) {
         final PostResponse postResponse = postService.create(postRequest);
         return ResponseEntity.created(URI.create("/posts/" + postResponse.getId())).body(postResponse);
     }
