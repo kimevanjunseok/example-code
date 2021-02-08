@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import spring.argumentresolver.controller.annotation.Login;
+import spring.argumentresolver.dto.LoginUser;
 import spring.argumentresolver.dto.PostRequest;
 import spring.argumentresolver.dto.PostResponse;
 import spring.argumentresolver.service.PostService;
@@ -23,7 +25,7 @@ public class PostController {
     }
 
     @PostMapping
-    public ResponseEntity<PostResponse> create(@RequestBody final PostRequest postRequest) {
+    public ResponseEntity<PostResponse> create(@Login final LoginUser loginUser, @RequestBody final PostRequest postRequest) {
         final PostResponse postResponse = postService.create(postRequest);
         return ResponseEntity.created(URI.create("/posts/" + postResponse.getId())).body(postResponse);
     }
