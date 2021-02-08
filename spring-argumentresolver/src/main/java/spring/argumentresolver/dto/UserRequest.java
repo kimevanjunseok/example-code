@@ -9,6 +9,11 @@ public class UserRequest {
 
     protected UserRequest() {}
 
+    public UserRequest(final String identification, final String password) {
+        this.identification = identification;
+        this.password = password;
+    }
+
     public User toEntity() {
         return new User(identification, password);
     }

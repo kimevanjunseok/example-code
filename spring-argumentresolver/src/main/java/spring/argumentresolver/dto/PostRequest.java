@@ -10,6 +10,11 @@ public class PostRequest {
 
     protected PostRequest() {}
 
+    public PostRequest(final String title, final String content) {
+        this.title = title;
+        this.content = content;
+    }
+
     public Post toEntity(final User user) {
         return new Post(title, content, user);
     }
