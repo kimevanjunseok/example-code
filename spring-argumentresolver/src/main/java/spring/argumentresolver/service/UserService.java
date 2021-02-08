@@ -20,4 +20,9 @@ public class UserService {
         final User user = userRepository.save(userRequest.toEntity());
         return UserResponse.of(user);
     }
+
+    public User findByIdentification(final String identification) {
+        return userRepository.findByIdentification(identification)
+                .orElseThrow(IllegalArgumentException::new);
+    }
 }
