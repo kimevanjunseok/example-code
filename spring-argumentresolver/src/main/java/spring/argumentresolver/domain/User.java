@@ -21,6 +21,11 @@ public class User {
 
     protected User() {}
 
+    public User(final String identification, final String password) {
+        this.identification = identification;
+        this.password = password;
+    }
+
     public Long getId() {
         return id;
     }
