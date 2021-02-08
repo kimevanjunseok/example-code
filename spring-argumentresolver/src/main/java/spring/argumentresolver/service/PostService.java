@@ -3,6 +3,7 @@ package spring.argumentresolver.service;
 import org.springframework.stereotype.Service;
 
 import spring.argumentresolver.domain.Post;
+import spring.argumentresolver.domain.User;
 import spring.argumentresolver.dto.PostRequest;
 import spring.argumentresolver.dto.PostResponse;
 import spring.argumentresolver.repository.PostRepository;
@@ -16,8 +17,8 @@ public class PostService {
         this.postRepository = postRepository;
     }
 
-    public PostResponse create(final PostRequest postRequest) {
-        final Post post = postRepository.save(postRequest.toEntity());
+    public PostResponse create(final User user, final PostRequest postRequest) {
+        final Post post = postRepository.save(postRequest.toEntity(user));
         return PostResponse.of(post);
     }
 }

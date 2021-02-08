@@ -1,6 +1,7 @@
 package spring.argumentresolver.dto;
 
 import spring.argumentresolver.domain.Post;
+import spring.argumentresolver.domain.User;
 
 public class PostRequest {
 
@@ -9,8 +10,8 @@ public class PostRequest {
 
     protected PostRequest() {}
 
-    public Post toEntity() {
-        return new Post(title, content);
+    public Post toEntity(final User user) {
+        return new Post(title, content, user);
     }
 
     public String getTitle() {
