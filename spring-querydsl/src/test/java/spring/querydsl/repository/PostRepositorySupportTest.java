@@ -13,10 +13,13 @@ import org.springframework.boot.test.context.SpringBootTest;
 import spring.querydsl.domain.Post;
 
 @SpringBootTest
-class PostRepositoryTest {
+class PostRepositorySupportTest {
 
     @Autowired
     private PostRepository postRepository;
+
+    @Autowired
+    private PostRepositorySupport postRepositorySupport;
 
     @AfterEach
     void tearDown() {
@@ -32,7 +35,7 @@ class PostRepositoryTest {
         postRepository.save(new Post("title2", "content"));
         postRepository.save(new Post("title3", "content"));
 
-        final List<Post> posts = postRepository.findByTitle("test");
+        final List<Post> posts = postRepositorySupport.findByTitle("test");
 
         assertAll(
                 () -> assertThat(posts).hasSize(3)
