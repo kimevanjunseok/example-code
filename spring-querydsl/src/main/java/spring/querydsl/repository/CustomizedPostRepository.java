@@ -4,7 +4,7 @@ import java.util.List;
 
 import spring.querydsl.domain.Post;
 
-public interface PostRepositoryCustom {
+public interface CustomizedPostRepository {
 
     List<Post> findByTitle(final String title);
 }

@@ -7,11 +7,11 @@ import java.util.List;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import spring.querydsl.domain.Post;
 
-public class PostRepositoryImpl implements PostRepositoryCustom {
+public class CustomizedPostRepositoryImpl implements CustomizedPostRepository {
 
     private final JPAQueryFactory jpaQueryFactory;
 
-    private PostRepositoryImpl(final JPAQueryFactory jpaQueryFactory) {
+    private CustomizedPostRepositoryImpl(final JPAQueryFactory jpaQueryFactory) {
         this.jpaQueryFactory = jpaQueryFactory;
     }
 
