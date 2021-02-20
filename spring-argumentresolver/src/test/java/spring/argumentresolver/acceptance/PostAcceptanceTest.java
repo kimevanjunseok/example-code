@@ -45,6 +45,11 @@ public class PostAcceptanceTest {
         );
     }
 
+    @Test
+    void create_Exception() {
+        postInternalServerError("/posts", "userId", "notExistUser", new PostRequest("title", "content"));
+    }
+
     public <T> T post(final String path, final Object request, final Class<T> responseType) {
         return given()
                 .body(request)
@@ -71,5 +76,19 @@ public class PostAcceptanceTest {
                 .log().all()
                 .statusCode(HttpStatus.CREATED.value())
                 .extract().as(responseType);
+    }
+
+    public void postInternalServerError(final String path, final String headerName, final Object headerValue,
+            final Object request) {
+        given()
+                .header(headerName, headerValue)
+                .body(request)
+                .contentType(MediaType.APPLICATION_JSON_VALUE)
+                .accept(MediaType.APPLICATION_JSON_VALUE)
+        .when()
+                .post(path)
+        .then()
+                .log().all()
+                .statusCode(HttpStatus.INTERNAL_SERVER_ERROR.value());
     }
 }
