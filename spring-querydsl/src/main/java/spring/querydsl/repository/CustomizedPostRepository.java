@@ -9,4 +9,6 @@ public interface CustomizedPostRepository {
     List<Post> findByTitle(final String title);
 
     List<Post> findDynamicQuery(final String title, final String content);
+
+    List<Post> findDynamicQueryAdvance(final String title, final String content);
 }

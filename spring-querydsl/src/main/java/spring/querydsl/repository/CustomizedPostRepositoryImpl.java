@@ -8,6 +8,7 @@ import org.springframework.util.ObjectUtils;
 import org.springframework.util.StringUtils;
 
 import com.querydsl.core.BooleanBuilder;
+import com.querydsl.core.types.dsl.BooleanExpression;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import spring.querydsl.domain.Post;
 
@@ -41,5 +42,27 @@ public class CustomizedPostRepositoryImpl implements CustomizedPostRepository {
         return jpaQueryFactory.selectFrom(post)
                 .where(booleanBuilder)
                 .fetch();
+    }
+
+    @Override
+    public List<Post> findDynamicQueryAdvance(final String title, final String content) {
+        return jpaQueryFactory.selectFrom(post)
+                .where(eqTitle(title),
+                        eqContent(content))
+                .fetch();
+    }
+
+    private BooleanExpression eqTitle(final String title) {
+        if (ObjectUtils.isEmpty(title)) {
+            return null;
+        }
+        return post.title.eq(title);
+    }
+
+    private BooleanExpression eqContent(final String content) {
+        if (ObjectUtils.isEmpty(content)) {
+            return null;
+        }
+        return post.content.eq(content);
     }
 }

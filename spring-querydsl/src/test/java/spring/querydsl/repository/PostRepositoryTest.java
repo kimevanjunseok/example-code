@@ -49,14 +49,37 @@ class PostRepositoryTest {
                 new Post("TestTitle", "content"),
                 new Post("TestTitle", "content"),
                 new Post("title", "TestContent"),
-                new Post("title", "TestContent")
+                new Post("title", "TestContent"),
+                new Post("TestTitle", "TestContent"),
+                new Post("TestTitle", "TestContent")
         ));
 
-        final List<Post> posts = postRepository.findDynamicQuery("TestTitle", "");
+        final List<Post> posts = postRepository.findDynamicQuery("TestTitle", "TestContent");
 
         assertAll(
                 () -> assertThat(posts).hasSize(2),
-                () -> assertThat(posts.get(0).getTitle()).isEqualTo("TestTitle")
+                () -> assertThat(posts.get(0).getTitle()).isEqualTo("TestTitle"),
+                () -> assertThat(posts.get(0).getContent()).isEqualTo("TestContent")
+        );
+    }
+
+    @Test
+    void findDynamicQueryAdvance() {
+        postRepository.saveAll(Arrays.asList(
+                new Post("TestTitle", "content"),
+                new Post("TestTitle", "content"),
+                new Post("title", "TestContent"),
+                new Post("title", "TestContent"),
+                new Post("TestTitle", "TestContent"),
+                new Post("TestTitle", "TestContent")
+        ));
+
+        final List<Post> posts = postRepository.findDynamicQueryAdvance("TestTitle", "TestContent");
+
+        assertAll(
+                () -> assertThat(posts).hasSize(2),
+                () -> assertThat(posts.get(0).getTitle()).isEqualTo("TestTitle"),
+                () -> assertThat(posts.get(0).getContent()).isEqualTo("TestContent")
         );
     }
 }
