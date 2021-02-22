@@ -3,6 +3,7 @@ package spring.querydsl.repository;
 import static org.assertj.core.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.util.Arrays;
 import java.util.List;
 
 import org.junit.jupiter.api.AfterEach;
@@ -28,12 +29,15 @@ class PostRepositorySupportTest {
 
     @Test
     void findByTitle() {
-        postRepository.save(new Post("test", "content"));
-        postRepository.save(new Post("test", "content"));
-        postRepository.save(new Post("test", "content"));
-        postRepository.save(new Post("title1", "content"));
-        postRepository.save(new Post("title2", "content"));
-        postRepository.save(new Post("title3", "content"));
+        postRepository.saveAll(Arrays.asList(
+                new Post("test", "content"),
+                new Post("test", "content"),
+                new Post("test", "content"),
+                new Post("title1", "content"),
+                new Post("title2", "content"),
+                new Post("title3", "content")
+
+        ));
 
         final List<Post> posts = postRepositorySupport.findByTitle("test");
 
