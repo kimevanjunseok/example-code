@@ -3,6 +3,7 @@ package spring.querydsl.repository;
 import static org.assertj.core.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.util.Arrays;
 import java.util.List;
 
 import org.junit.jupiter.api.AfterEach;
@@ -39,6 +40,23 @@ class PostRepositoryTest {
 
         assertAll(
                 () -> assertThat(posts).hasSize(3)
+        );
+    }
+
+    @Test
+    void findDynamicQuery() {
+        postRepository.saveAll(Arrays.asList(
+                new Post("TestTitle", "content"),
+                new Post("TestTitle", "content"),
+                new Post("title", "TestContent"),
+                new Post("title", "TestContent")
+        ));
+
+        final List<Post> posts = postRepository.findDynamicQuery("TestTitle", "");
+
+        assertAll(
+                () -> assertThat(posts).hasSize(2),
+                () -> assertThat(posts.get(0).getTitle()).isEqualTo("TestTitle")
         );
     }
 }
