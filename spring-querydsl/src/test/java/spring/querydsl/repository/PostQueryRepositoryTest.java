@@ -36,7 +36,6 @@ class PostQueryRepositoryTest {
                 new Post("title1", "content"),
                 new Post("title2", "content"),
                 new Post("title3", "content")
-
         ));
 
         final List<Post> posts = postQueryRepository.findByTitle("test");
