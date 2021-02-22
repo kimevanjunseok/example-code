@@ -41,7 +41,8 @@ class PostQueryRepositoryTest {
         final List<Post> posts = postQueryRepository.findByTitle("test");
 
         assertAll(
-                () -> assertThat(posts).hasSize(3)
+                () -> assertThat(posts).hasSize(3),
+                () -> assertThat(posts.get(0).getTitle()).isEqualTo("test")
         );
     }
 }
