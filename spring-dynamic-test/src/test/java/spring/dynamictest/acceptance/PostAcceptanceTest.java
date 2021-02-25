@@ -34,13 +34,21 @@ public class PostAcceptanceTest {
     Stream<DynamicTest> dynamicTests() {
         return Stream.of(
                 dynamicTest("게시글을 생성한다.", () -> {
-                    create(new PostRequest("title1", "content1"), "/posts", PostResponse.class);
-                    create(new PostRequest("title2", "content2"), "/posts", PostResponse.class);
-                    create(new PostRequest("title3", "content3"), "/posts", PostResponse.class);
+                    final PostResponse postResponse1 = create(new PostRequest("title1", "content1"), "/posts", PostResponse.class);
+                    final PostResponse postResponse2 = create(new PostRequest("title2", "content2"), "/posts", PostResponse.class);
+                    final PostResponse postResponse3 = create(new PostRequest("title3", "content3"), "/posts", PostResponse.class);
 
-                    final List<PostResponse> postResponse = getAll("/posts", PostResponse.class);
-
-                    assertThat(postResponse).hasSize(3);
+                    assertAll(
+                            () -> assertThat(postResponse1.getId()).isNotNull(),
+                            () -> assertThat(postResponse1.getTitle()).isEqualTo("title1"),
+                            () -> assertThat(postResponse1.getContent()).isEqualTo("content1"),
+                            () -> assertThat(postResponse2.getId()).isNotNull(),
+                            () -> assertThat(postResponse2.getTitle()).isEqualTo("title2"),
+                            () -> assertThat(postResponse2.getContent()).isEqualTo("content2"),
+                            () -> assertThat(postResponse3.getId()).isNotNull(),
+                            () -> assertThat(postResponse3.getTitle()).isEqualTo("title3"),
+                            () -> assertThat(postResponse3.getContent()).isEqualTo("content3")
+                    );
                 }),
                 dynamicTest("게시글을 전체 조회한다.", () -> {
                     final List<PostResponse> postResponse = getAll("/posts", PostResponse.class);
