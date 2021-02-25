@@ -1,5 +1,8 @@
 package spring.dynamictest.dto;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 import spring.dynamictest.domain.Post;
 
 public class PostResponse {
@@ -16,6 +19,12 @@ public class PostResponse {
 
     public static PostResponse of(final Post post) {
         return new PostResponse(post.getId(), post.getTitle(), post.getContent());
+    }
+
+    public static List<PostResponse> asList(final List<Post> posts) {
+        return posts.stream()
+                .map(PostResponse::of)
+                .collect(Collectors.toList());
     }
 
     public Long getId() {
