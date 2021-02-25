@@ -9,6 +9,11 @@ public class PostRequest {
 
     protected PostRequest() {}
 
+    public PostRequest(final String title, final String content) {
+        this.title = title;
+        this.content = content;
+    }
+
     public String getTitle() {
         return title;
     }

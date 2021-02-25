@@ -8,6 +8,7 @@ import spring.dynamictest.domain.Post;
 import spring.dynamictest.dto.PostRequest;
 import spring.dynamictest.dto.PostResponse;
 import spring.dynamictest.repository.PostRepository;
+import spring.exception.PostNotFoundException;
 
 @Service
 public class PostService {
@@ -30,13 +31,13 @@ public class PostService {
 
     public PostResponse findById(final Long postId) {
         final Post post = postRepository.findById(postId)
-                .orElseThrow(IllegalArgumentException::new);
+                .orElseThrow(() -> new PostNotFoundException("게시글을 찾을 수 없습니다."));
         return PostResponse.of(post);
     }
 
     public void delete(final Long postId) {
         final Post post = postRepository.findById(postId)
-                .orElseThrow(IllegalArgumentException::new);;
+                .orElseThrow(() -> new PostNotFoundException("게시글을 찾을 수 없습니다."));;
         postRepository.delete(post);
     }
 }
