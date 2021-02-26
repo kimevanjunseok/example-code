@@ -3,6 +3,7 @@
 ### Description
 
 - [spring-argumentresolver](https://velog.io/@tigger/Argument-Resolver)
+- spring-dynamic-test
 - [spring-etag](https://velog.io/@tigger/ETag-with-Spring)
 - [spring-querydsl](https://velog.io/@tigger/QueryDSL)
 - [spring-rest-docs](https://velog.io/@tigger/API-%EB%AC%B8%EC%84%9C-%EC%9E%90%EB%8F%99%ED%99%94-Spring-REST-Docs)
