@@ -1,5 +1,7 @@
 package spring.jpa.index.service;
 
+import java.util.List;
+
 import org.springframework.stereotype.Service;
 
 import spring.jpa.index.domain.User;
@@ -19,5 +21,10 @@ public class UserService {
     public UserResponse create(final UserCreateRequest userCreateRequest) {
         final User user = userRepository.save(userCreateRequest.toEntity());
         return UserResponse.of(user);
+    }
+
+    public List<UserResponse> findAll() {
+        final List<User> users = userRepository.findAll();
+        return UserResponse.asList(users);
     }
 }
