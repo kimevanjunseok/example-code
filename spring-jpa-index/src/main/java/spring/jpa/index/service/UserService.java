@@ -23,8 +23,9 @@ public class UserService {
         return UserResponse.of(user);
     }
 
-    public List<UserResponse> findAll() {
-        final List<User> users = userRepository.findAll();
-        return UserResponse.asList(users);
+    public UserResponse findByName(final String name) {
+        final User user = userRepository.findByName(name)
+                .orElseThrow(IllegalArgumentException::new);
+        return UserResponse.of(user);
     }
 }

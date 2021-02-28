@@ -21,12 +21,6 @@ public class UserResponse {
         return new UserResponse(user.getId(), user.getEmail(), user.getName());
     }
 
-    public static List<UserResponse> asList(final List<User> users) {
-        return users.stream()
-                .map(UserResponse::of)
-                .collect(Collectors.toList());
-    }
-
     public Long getId() {
         return id;
     }
