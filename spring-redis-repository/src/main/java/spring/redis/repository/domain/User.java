@@ -1,36 +1,32 @@
 package spring.redis.repository.domain;
 
+import java.io.Serializable;
+
 import org.springframework.data.annotation.Id;
 import org.springframework.data.redis.core.RedisHash;
 
 @RedisHash("User")
-public class User {
+public class User implements Serializable {
 
     @Id
-    private Long id;
-    private String email;
-    private String password;
+    private String id;
     private String name;
+    private int age;
 
-    public User(final String email, final String password, final String name) {
-        this.email = email;
-        this.password = password;
+    public User(final String name, final int age) {
         this.name = name;
+        this.age = age;
     }
 
-    public Long getId() {
+    public String getId() {
         return id;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public String getPassword() {
-        return password;
     }
 
     public String getName() {
         return name;
+    }
+
+    public int getAge() {
+        return age;
     }
 }

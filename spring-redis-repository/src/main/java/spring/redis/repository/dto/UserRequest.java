@@ -4,23 +4,18 @@ import spring.redis.repository.domain.User;
 
 public class UserRequest {
 
-    private String email;
-    private String password;
     private String name;
+    private int age;
 
     public User toEntity() {
-        return new User(email, password, name);
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public String getPassword() {
-        return password;
+        return new User(name, age);
     }
 
     public String getName() {
         return name;
+    }
+
+    public int getAge() {
+        return age;
     }
 }

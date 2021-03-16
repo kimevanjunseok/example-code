@@ -20,4 +20,10 @@ public class UserService {
         final User user = userRepository.save(userRequest.toEntity());
         return UserResponse.of(user);
     }
+
+    public UserResponse findById(final String userId) {
+        final User user = userRepository.findById(userId)
+                .orElseThrow(RuntimeException::new);
+        return UserResponse.of(user);
+    }
 }

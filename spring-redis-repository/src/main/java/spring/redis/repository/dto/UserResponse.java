@@ -4,29 +4,29 @@ import spring.redis.repository.domain.User;
 
 public class UserResponse {
 
-    private final Long id;
-    private final String email;
+    private final String id;
     private final String name;
+    private final int age;
 
-    private UserResponse(final Long id, final String email, final String name) {
+    private UserResponse(final String id, final String name, final int age) {
         this.id = id;
-        this.email = email;
         this.name = name;
+        this.age = age;
     }
 
     public static UserResponse of(final User user) {
-        return new UserResponse(user.getId(), user.getEmail(), user.getName());
+        return new UserResponse(user.getId(), user.getName(), user.getAge());
     }
 
-    public Long getId() {
+    public String getId() {
         return id;
-    }
-
-    public String getEmail() {
-        return email;
     }
 
     public String getName() {
         return name;
+    }
+
+    public int getAge() {
+        return age;
     }
 }
