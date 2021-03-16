@@ -7,7 +7,7 @@ import spring.redis.repository.service.UserService;
 @RestController
 public class UserController {
 
-    private UserService userService;
+    private final UserService userService;
 
     public UserController(final UserService userService) {
         this.userService = userService;
