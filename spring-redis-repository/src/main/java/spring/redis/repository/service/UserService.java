@@ -26,4 +26,10 @@ public class UserService {
                 .orElseThrow(RuntimeException::new);
         return UserResponse.of(user);
     }
+
+    public void delete(final String userId) {
+        final User user = userRepository.findById(userId)
+                .orElseThrow(RuntimeException::new);
+        userRepository.delete(user);
+    }
 }

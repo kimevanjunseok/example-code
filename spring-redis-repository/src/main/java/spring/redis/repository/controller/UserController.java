@@ -3,6 +3,7 @@ package spring.redis.repository.controller;
 import java.net.URI;
 
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -33,5 +34,11 @@ public class UserController {
     @GetMapping("/{userId}")
     public ResponseEntity<UserResponse> findById(@PathVariable String userId) {
         return ResponseEntity.ok(userService.findById(userId));
+    }
+
+    @DeleteMapping("/{userId}")
+    public ResponseEntity<Void> delete(@PathVariable String userId) {
+        userService.delete(userId);
+        return ResponseEntity.noContent().build();
     }
 }
