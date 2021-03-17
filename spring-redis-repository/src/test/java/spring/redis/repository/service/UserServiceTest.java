@@ -3,6 +3,7 @@ package spring.redis.repository.service;
 import static org.assertj.core.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.*;
 
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -10,12 +11,21 @@ import org.springframework.boot.test.context.SpringBootTest;
 import spring.redis.repository.config.TestRedisConfiguration;
 import spring.redis.repository.dto.UserRequest;
 import spring.redis.repository.dto.UserResponse;
+import spring.redis.repository.repository.UserRepository;
 
 @SpringBootTest(classes = TestRedisConfiguration.class)
 class UserServiceTest {
 
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private UserRepository userRepository;
+
+    @AfterEach
+    void tearDown() {
+        userRepository.deleteAll();
+    }
 
     @Test
     void save() {
