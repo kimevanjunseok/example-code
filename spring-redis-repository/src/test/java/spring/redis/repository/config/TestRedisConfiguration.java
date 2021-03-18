@@ -27,10 +27,6 @@ public class TestRedisConfiguration {
 
     private RedisServer redisServer;
 
-    public TestRedisConfiguration() {
-        this.redisServer = new RedisServer(redisPort);
-    }
-
     @PostConstruct
     public void postConstruct() throws IOException {
         int port = isRedisRunning()? findAvailablePort() : redisPort;
