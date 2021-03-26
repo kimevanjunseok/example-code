@@ -5,7 +5,6 @@ import static org.assertj.core.api.Assertions.*;
 import javax.annotation.Resource;
 
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.redis.core.HashOperations;
 
@@ -15,10 +14,19 @@ class HashOperationsTest {
     private static final String HASH_OPERATIONS_KEY = "hashOperationsKey";
 
     @Resource(name = "redisTemplate")
-    private HashOperations<String, Object, Object> hashOperations;
+    private HashOperations<String, String, Object> hashOperations;
 
     @Test
     void HashOperations_Test() {
+        // increment
+        hashOperations.put(HASH_OPERATIONS_KEY, "count1", "1");
+        hashOperations.put(HASH_OPERATIONS_KEY, "count2", "1");
+        hashOperations.increment(HASH_OPERATIONS_KEY, "count1", 1);
+        hashOperations.increment(HASH_OPERATIONS_KEY, "count2", 2);
+
+        assertThat(hashOperations.get(HASH_OPERATIONS_KEY, "count1")).isEqualTo("2");
+        assertThat(hashOperations.get(HASH_OPERATIONS_KEY, "count2")).isEqualTo("3");
+
         // put
         hashOperations.put(HASH_OPERATIONS_KEY, "tigger1", "개발자");
         hashOperations.put(HASH_OPERATIONS_KEY, "tigger2", "취준생");
@@ -40,10 +48,10 @@ class HashOperationsTest {
         // size
         Long size = hashOperations.size(HASH_OPERATIONS_KEY);
 
-        assertThat(size).isEqualTo(4);
+        assertThat(size).isEqualTo(6);
 
         // delete
-        hashOperations.delete(HASH_OPERATIONS_KEY, "tigger1", "tigger2", "tigger3", "notExist");
+        hashOperations.delete(HASH_OPERATIONS_KEY, "count1", "count2", "tigger1", "tigger2", "tigger3", "notExist");
 
         assertThat(hashOperations.get(HASH_OPERATIONS_KEY, "tigger1")).isNull();
         assertThat(hashOperations.get(HASH_OPERATIONS_KEY, "tigger2")).isNull();
