@@ -53,6 +53,8 @@ class HashOperationsTest {
         // delete
         hashOperations.delete(HASH_OPERATIONS_KEY, "count1", "count2", "tigger1", "tigger2", "tigger3", "notExist");
 
+        assertThat(hashOperations.get(HASH_OPERATIONS_KEY, "count1")).isNull();
+        assertThat(hashOperations.get(HASH_OPERATIONS_KEY, "count2")).isNull();
         assertThat(hashOperations.get(HASH_OPERATIONS_KEY, "tigger1")).isNull();
         assertThat(hashOperations.get(HASH_OPERATIONS_KEY, "tigger2")).isNull();
         assertThat(hashOperations.get(HASH_OPERATIONS_KEY, "tigger3")).isNull();
