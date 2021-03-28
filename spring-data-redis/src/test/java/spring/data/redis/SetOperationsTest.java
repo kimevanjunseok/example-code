@@ -8,11 +8,9 @@ import java.util.Set;
 import javax.annotation.Resource;
 
 import org.junit.jupiter.api.Test;
-import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.redis.core.SetOperations;
 
-@SpringBootTest(classes = RedisApplication.class)
-class SetOperationsTest {
+class SetOperationsTest extends RedisTest {
 
     private static final String SET_OPERATIONS_KEY_1 = "setOperationsKey1";
     private static final String SET_OPERATIONS_KEY_2 = "setOperationsKey2";

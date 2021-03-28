@@ -7,11 +7,9 @@ import java.util.Arrays;
 import javax.annotation.Resource;
 
 import org.junit.jupiter.api.Test;
-import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.redis.core.ListOperations;
 
-@SpringBootTest(classes = RedisApplication.class)
-class ListOperationsTest {
+class ListOperationsTest extends RedisTest {
 
     private static final String LIST_OPERATIONS_KEY = "listOperationsKey";
 

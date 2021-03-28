@@ -5,11 +5,9 @@ import static org.assertj.core.api.Assertions.*;
 import javax.annotation.Resource;
 
 import org.junit.jupiter.api.Test;
-import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.redis.core.HashOperations;
 
-@SpringBootTest(classes = RedisApplication.class)
-class HashOperationsTest {
+class HashOperationsTest extends RedisTest {
 
     private static final String HASH_OPERATIONS_KEY = "hashOperationsKey";
 
