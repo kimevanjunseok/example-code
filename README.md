@@ -3,6 +3,7 @@
 ### Description
 
 - [spring-argumentresolver](https://velog.io/@tigger/Argument-Resolver)
+- spring-data-redis
 - spring-dynamic-test
 - [spring-etag](https://velog.io/@tigger/ETag-with-Spring)
 - spring-jpa-index
