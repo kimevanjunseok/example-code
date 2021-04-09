@@ -1,6 +1,7 @@
 package spring.data.redis;
 
 import static org.assertj.core.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.Arrays;
 
@@ -30,8 +31,11 @@ class ListOperationsTest extends RedisTest {
         listOperations.rightPushAll(LIST_OPERATIONS_KEY, Arrays.asList("l", "d"));
 
         // index
-        assertThat(listOperations.index(LIST_OPERATIONS_KEY, 0)).isEqualTo("H");
-        assertThat(listOperations.index(LIST_OPERATIONS_KEY, 10)).isEqualTo("d");
+        assertAll(
+                () -> assertThat(listOperations.index(LIST_OPERATIONS_KEY, 0)).isEqualTo("H"),
+                () -> assertThat(listOperations.index(LIST_OPERATIONS_KEY, 10)).isEqualTo("d")
+        );
+
 
         // range
         assertThat(listOperations.range(LIST_OPERATIONS_KEY, 0, 10)).isEqualTo(
@@ -52,11 +56,13 @@ class ListOperationsTest extends RedisTest {
         String leftPush4 = listOperations.leftPop(LIST_OPERATIONS_KEY);
         String leftPush5 = listOperations.leftPop(LIST_OPERATIONS_KEY);
 
-        assertThat(leftPush1).isEqualTo("H");
-        assertThat(leftPush2).isEqualTo("e");
-        assertThat(leftPush3).isEqualTo("l");
-        assertThat(leftPush4).isEqualTo("l");
-        assertThat(leftPush5).isEqualTo("o");
+        assertAll(
+                () -> assertThat(leftPush1).isEqualTo("H"),
+                () -> assertThat(leftPush2).isEqualTo("e"),
+                () -> assertThat(leftPush3).isEqualTo("l"),
+                () -> assertThat(leftPush4).isEqualTo("l"),
+                () -> assertThat(leftPush5).isEqualTo("o")
+        );
 
         // rightPop
         String rightPop1 = listOperations.rightPop(LIST_OPERATIONS_KEY);
@@ -65,10 +71,12 @@ class ListOperationsTest extends RedisTest {
         String rightPop4 = listOperations.rightPop(LIST_OPERATIONS_KEY);
         String rightPop5 = listOperations.rightPop(LIST_OPERATIONS_KEY);
 
-        assertThat(rightPop1).isEqualTo("d");
-        assertThat(rightPop2).isEqualTo("l");
-        assertThat(rightPop3).isEqualTo("r");
-        assertThat(rightPop4).isEqualTo("o");
-        assertThat(rightPop5).isEqualTo("W");
+        assertAll(
+                () -> assertThat(rightPop1).isEqualTo("d"),
+                () -> assertThat(rightPop2).isEqualTo("l"),
+                () -> assertThat(rightPop3).isEqualTo("r"),
+                () -> assertThat(rightPop4).isEqualTo("o"),
+                () -> assertThat(rightPop5).isEqualTo("W")
+        );
     }
 }
