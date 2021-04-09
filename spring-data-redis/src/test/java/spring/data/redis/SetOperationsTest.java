@@ -1,6 +1,7 @@
 package spring.data.redis;
 
 import static org.assertj.core.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.List;
 import java.util.Set;
@@ -31,12 +32,16 @@ class SetOperationsTest extends RedisTest {
         Set<String> members1 = setOperations.members(SET_OPERATIONS_KEY_1);
         Set<String> members2 = setOperations.members(SET_OPERATIONS_KEY_2);
 
-        assertThat(members1).hasSize(4);
-        assertThat(members2).hasSize(5);
+        assertAll(
+                () -> assertThat(members1).hasSize(4),
+                () -> assertThat(members2).hasSize(5)
+        );
 
         // size
-        assertThat(setOperations.size(SET_OPERATIONS_KEY_1)).isEqualTo(4);
-        assertThat(setOperations.size(SET_OPERATIONS_KEY_2)).isEqualTo(5);
+        assertAll(
+                () -> assertThat(setOperations.size(SET_OPERATIONS_KEY_1)).isEqualTo(4),
+                () -> assertThat(setOperations.size(SET_OPERATIONS_KEY_2)).isEqualTo(5)
+        );
 
         // intersect
         Set<String> intersect = setOperations.intersect(SET_OPERATIONS_KEY_1, SET_OPERATIONS_KEY_2);
@@ -61,7 +66,9 @@ class SetOperationsTest extends RedisTest {
         List<String> pops = setOperations.pop(SET_OPERATIONS_KEY_1, 4);
         String pop = setOperations.pop(SET_OPERATIONS_KEY_2);
 
-        assertThat(pops).hasSize(4);
-        assertThat(pop).isEqualTo("6");
+        assertAll(
+                () -> assertThat(pops).hasSize(4),
+                () -> assertThat(pop).isEqualTo("6")
+        );
     }
 }
