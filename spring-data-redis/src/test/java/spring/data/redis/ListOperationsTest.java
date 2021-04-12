@@ -18,38 +18,57 @@ class ListOperationsTest extends RedisTest {
     private ListOperations<String, String> listOperations;
 
     @Test
-    void ListOperations_Test() {
-        // leftPush
+    void leftPush() {
         listOperations.leftPush(LIST_OPERATIONS_KEY, "o");
         listOperations.leftPushAll(LIST_OPERATIONS_KEY, "l", "l");
         listOperations.leftPushAll(LIST_OPERATIONS_KEY, Arrays.asList("e", "H"));
 
-        // rightPush
-        listOperations.rightPush(LIST_OPERATIONS_KEY, " ");
+        assertAll(
+                () -> assertThat(listOperations.index(LIST_OPERATIONS_KEY, 0)).isEqualTo("H"),
+                () -> assertThat(listOperations.index(LIST_OPERATIONS_KEY, 1)).isEqualTo("e"),
+                () -> assertThat(listOperations.index(LIST_OPERATIONS_KEY, 2)).isEqualTo("l"),
+                () -> assertThat(listOperations.index(LIST_OPERATIONS_KEY, 3)).isEqualTo("l"),
+                () -> assertThat(listOperations.index(LIST_OPERATIONS_KEY, 4)).isEqualTo("o")
+        );
+    }
+
+    @Test
+    void rightPush() {
         listOperations.rightPush(LIST_OPERATIONS_KEY, "W");
         listOperations.rightPushAll(LIST_OPERATIONS_KEY, "o", "r");
         listOperations.rightPushAll(LIST_OPERATIONS_KEY, Arrays.asList("l", "d"));
 
-        // index
         assertAll(
-                () -> assertThat(listOperations.index(LIST_OPERATIONS_KEY, 0)).isEqualTo("H"),
-                () -> assertThat(listOperations.index(LIST_OPERATIONS_KEY, 10)).isEqualTo("d")
+                () -> assertThat(listOperations.index(LIST_OPERATIONS_KEY, 0)).isEqualTo("W"),
+                () -> assertThat(listOperations.index(LIST_OPERATIONS_KEY, 1)).isEqualTo("o"),
+                () -> assertThat(listOperations.index(LIST_OPERATIONS_KEY, 2)).isEqualTo("r"),
+                () -> assertThat(listOperations.index(LIST_OPERATIONS_KEY, 3)).isEqualTo("l"),
+                () -> assertThat(listOperations.index(LIST_OPERATIONS_KEY, 4)).isEqualTo("d")
         );
+    }
 
+    @Test
+    void range() {
+        listOperations.rightPushAll(LIST_OPERATIONS_KEY, Arrays.asList("H", "e", "l", "l", "o", " ", "W", "o", "r", "l", "d"));
 
-        // range
         assertThat(listOperations.range(LIST_OPERATIONS_KEY, 0, 10)).isEqualTo(
                 Arrays.asList("H", "e", "l", "l", "o", " ", "W", "o", "r", "l", "d")
         );
+    }
 
-        // remove
+    @Test
+    void remove() {
+        listOperations.rightPushAll(LIST_OPERATIONS_KEY, Arrays.asList("H", "e", "l", "l", "o", " ", "W", "o", "r", "l", "d"));
         listOperations.remove(LIST_OPERATIONS_KEY, 1, " ");
 
         assertThat(listOperations.range(LIST_OPERATIONS_KEY, 0, 9)).isEqualTo(
                 Arrays.asList("H", "e", "l", "l", "o", "W", "o", "r", "l", "d")
         );
+    }
 
-        // leftPop
+    @Test
+    void leftPop() {
+        listOperations.rightPushAll(LIST_OPERATIONS_KEY, Arrays.asList("H", "e", "l", "l", "o", " ", "W", "o", "r", "l", "d"));
         String leftPush1 = listOperations.leftPop(LIST_OPERATIONS_KEY);
         String leftPush2 = listOperations.leftPop(LIST_OPERATIONS_KEY);
         String leftPush3 = listOperations.leftPop(LIST_OPERATIONS_KEY);
@@ -63,8 +82,11 @@ class ListOperationsTest extends RedisTest {
                 () -> assertThat(leftPush4).isEqualTo("l"),
                 () -> assertThat(leftPush5).isEqualTo("o")
         );
+    }
 
-        // rightPop
+    @Test
+    void rightPop() {
+        listOperations.rightPushAll(LIST_OPERATIONS_KEY, Arrays.asList("H", "e", "l", "l", "o", " ", "W", "o", "r", "l", "d"));
         String rightPop1 = listOperations.rightPop(LIST_OPERATIONS_KEY);
         String rightPop2 = listOperations.rightPop(LIST_OPERATIONS_KEY);
         String rightPop3 = listOperations.rightPop(LIST_OPERATIONS_KEY);

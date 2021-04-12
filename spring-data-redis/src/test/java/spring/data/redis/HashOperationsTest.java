@@ -16,14 +16,10 @@ class HashOperationsTest extends RedisTest {
     @Resource(name = "redisTemplate")
     private HashOperations<String, String, Object> hashOperations;
 
-    @BeforeEach
-    void setUp() {
-        hashOperations.put(HASH_OPERATIONS_KEY, "tigger1", "개발자");
-        hashOperations.put(HASH_OPERATIONS_KEY, "tigger2", "취준생");
-    }
-
     @Test
     void put() {
+        hashOperations.put(HASH_OPERATIONS_KEY, "tigger1", "개발자");
+        hashOperations.put(HASH_OPERATIONS_KEY, "tigger2", "취준생");
         hashOperations.put(HASH_OPERATIONS_KEY, "tigger3", "백수");
 
         assertAll(
@@ -48,6 +44,8 @@ class HashOperationsTest extends RedisTest {
 
     @Test
     void putIfAbsent() {
+        hashOperations.put(HASH_OPERATIONS_KEY, "tigger1", "개발자");
+        hashOperations.put(HASH_OPERATIONS_KEY, "tigger2", "취준생");
         Boolean tigger1 = hashOperations.putIfAbsent(HASH_OPERATIONS_KEY, "tigger1", "요리사");
         Boolean notExist = hashOperations.putIfAbsent(HASH_OPERATIONS_KEY, "notExist", "개발자");
 
@@ -61,6 +59,8 @@ class HashOperationsTest extends RedisTest {
 
     @Test
     void size() {
+        hashOperations.put(HASH_OPERATIONS_KEY, "tigger1", "개발자");
+        hashOperations.put(HASH_OPERATIONS_KEY, "tigger2", "취준생");
         Long size = hashOperations.size(HASH_OPERATIONS_KEY);
 
         assertThat(size).isEqualTo(2);
@@ -68,6 +68,8 @@ class HashOperationsTest extends RedisTest {
 
     @Test
     void delete() {
+        hashOperations.put(HASH_OPERATIONS_KEY, "tigger1", "개발자");
+        hashOperations.put(HASH_OPERATIONS_KEY, "tigger2", "취준생");
         hashOperations.delete(HASH_OPERATIONS_KEY, "tigger1", "tigger2");
 
         assertAll(
