@@ -15,31 +15,41 @@ class ValueOperationsTest extends RedisTest {
     private ValueOperations<String, String> valueOperations;
 
     @Test
-    void ValueOperations_Test() {
-        // append
+    void append() {
         valueOperations.append(VALUE_OPERATIONS_KEY, "Hello");
         valueOperations.append(VALUE_OPERATIONS_KEY, "World");
+
         assertThat(valueOperations.get(VALUE_OPERATIONS_KEY)).isEqualTo("HelloWorld");
+    }
 
-        // set
+    @Test
+    void set() {
         valueOperations.set(VALUE_OPERATIONS_KEY, "1");
-        assertThat(valueOperations.get(VALUE_OPERATIONS_KEY)).isEqualTo("1");
 
-        // increment
+        assertThat(valueOperations.get(VALUE_OPERATIONS_KEY)).isEqualTo("1");
+    }
+
+    @Test
+    void increment() {
+        valueOperations.set(VALUE_OPERATIONS_KEY, "1");
         valueOperations.increment(VALUE_OPERATIONS_KEY);
+
         assertThat(valueOperations.get(VALUE_OPERATIONS_KEY)).isEqualTo("2");
 
         valueOperations.increment(VALUE_OPERATIONS_KEY, 3);
-        assertThat(valueOperations.get(VALUE_OPERATIONS_KEY)).isEqualTo("5");
 
-        // decrement
+        assertThat(valueOperations.get(VALUE_OPERATIONS_KEY)).isEqualTo("5");
+    }
+
+    @Test
+    void decrement() {
+        valueOperations.set(VALUE_OPERATIONS_KEY, "5");
         valueOperations.decrement(VALUE_OPERATIONS_KEY);
+
         assertThat(valueOperations.get(VALUE_OPERATIONS_KEY)).isEqualTo("4");
 
         valueOperations.decrement(VALUE_OPERATIONS_KEY, 3);
-        assertThat(valueOperations.get(VALUE_OPERATIONS_KEY)).isEqualTo("1");
 
-        // size
-        assertThat(valueOperations.size(VALUE_OPERATIONS_KEY)).isEqualTo(1);
+        assertThat(valueOperations.get(VALUE_OPERATIONS_KEY)).isEqualTo("1");
     }
 }
