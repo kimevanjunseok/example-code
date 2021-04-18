@@ -21,6 +21,16 @@ public class Post {
 
     protected Post() {}
 
+    public Post(final String title, final String content) {
+        this.title = title;
+        this.content = content;
+    }
+
+    public void update(final Post post) {
+        this.title = post.getTitle();
+        this.content = post.getContent();
+    }
+
     public Long getId() {
         return id;
     }
