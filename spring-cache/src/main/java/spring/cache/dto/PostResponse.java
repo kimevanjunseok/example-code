@@ -9,16 +9,14 @@ public class PostResponse {
 
     private Long id;
     private String title;
-    private String content;
 
-    private PostResponse(final Long id, final String title, final String content) {
+    private PostResponse(final Long id, final String title) {
         this.id = id;
         this.title = title;
-        this.content = content;
     }
 
     public static PostResponse of(final Post post) {
-        return new PostResponse(post.getId(), post.getTitle(), post.getContent());
+        return new PostResponse(post.getId(), post.getTitle());
     }
 
     public static List<PostResponse> asList(final List<Post> posts) {
@@ -33,9 +31,5 @@ public class PostResponse {
 
     public String getTitle() {
         return title;
-    }
-
-    public String getContent() {
-        return content;
     }
 }

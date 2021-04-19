@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import spring.cache.dto.PostDetailResponse;
 import spring.cache.dto.PostRequest;
 import spring.cache.dto.PostResponse;
 import spring.cache.service.PostService;
@@ -39,9 +40,9 @@ public class PostController {
     }
 
     @GetMapping("/{postId}")
-    public ResponseEntity<PostResponse> findById(@PathVariable Long postId) {
-        final PostResponse postResponse = postService.findById(postId);
-        return ResponseEntity.ok(postResponse);
+    public ResponseEntity<PostDetailResponse> findById(@PathVariable Long postId) {
+        final PostDetailResponse postDetailResponse = postService.findById(postId);
+        return ResponseEntity.ok(postDetailResponse);
     }
 
     @PutMapping("/{postId}")
