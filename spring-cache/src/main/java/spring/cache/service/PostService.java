@@ -43,10 +43,11 @@ public class PostService {
 
     @CachePut(value = "PostDetail", key = "#postId")
     @CacheEvict(value = "Post", allEntries = true)
-    public void update(final Long postId, final PostRequest postRequest) {
+    public PostDetailResponse update(final Long postId, final PostRequest postRequest) {
         final Post post = postRepository.findById(postId)
                 .orElseThrow(RuntimeException::new);
         post.update(postRequest.toEntity());
+        return PostDetailResponse.of(post);
     }
 
     @Caching(evict = {
